@@ -27,15 +27,11 @@ window.onload = function() {
         var cleanedFirstLine = firstLine.toLowerCase().replace(/\s+/g, '_');
         csvString = csvString.replace(firstLine, cleanedFirstLine);
 
-        console.log(csvString);
-
         // Parse csv.
-        csvFile = $.csv.toObjects(csvString);
-
+        // csvFile = $.csv.toObjects(csvString, {startIndex: 1});
+        var csv = new CSV(csvString);
         scope.$apply(function() {
-          for (var i = 0; i < csvFile.length; i++) {
-            scope.csv.addRow(csvFile[i]);
-          };
+          scope.csv.addArray(csv);
         });
       };
 
