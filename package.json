@@ -1,0 +1,21 @@
+{
+  "name": "import",
+  "description": "Import UI for Segment.",
+  "version": "0.0.1",
+  "author": "Andy Jiang",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lambtron/segment-import"
+  },
+  "engines": {
+    "node": "0.11.14",
+    "npm": "1.1.x"
+  },
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "underscore": "latest",
+    "request": "latest"
+  }
+}
