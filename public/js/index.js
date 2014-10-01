@@ -11,7 +11,7 @@ window.onload = function() {
 
     // Reset firebase and local data store.
     scope.$apply(function() {
-      scope.recipients.removeAll();
+      scope.csv.removeAll();
     });
 
     var file = fileInput.files[0];
@@ -24,16 +24,17 @@ window.onload = function() {
         var csvString = reader.result;
         // Clean the headers.
         var firstLine = csvString.split('\n')[0];
-        var cleanedFirstLine = firstLine.toLowerCase().replace(/\s+/g, '');
+        var cleanedFirstLine = firstLine.toLowerCase().replace(/\s+/g, '_');
         csvString = csvString.replace(firstLine, cleanedFirstLine);
+
+        console.log(csvString);
 
         // Parse csv.
         csvFile = $.csv.toObjects(csvString);
 
         scope.$apply(function() {
           for (var i = 0; i < csvFile.length; i++) {
-            csvFile[i].status = "uncontacted";
-            scope.recipients.addPerson(csvFile[i]);
+            scope.csv.addRow(csvFile[i]);
           };
         });
       };
