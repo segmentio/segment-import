@@ -19,7 +19,6 @@ window.onload = function() {
 
     if (file.type.match(textType)) {
       var reader = new FileReader();
-      console.log(reader);
 
       reader.onload = function(e) {
         var csvString = reader.result;

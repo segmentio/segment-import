@@ -14,11 +14,15 @@
       // Send request to Segment.
       // Need writeKey
       var writeKey = req.body.writeKey;
-      var batch = req.body.load;
+      var batch = {
+        batch: req.body.load
+      };
+
       Segment.batchImport(batch, writeKey, function(err, data) {
         if (err)
           console.log(err);
 
+        console.log(data);
         res.send(200);
       });
     });

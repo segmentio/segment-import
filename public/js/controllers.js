@@ -33,7 +33,14 @@ segImport.controller('mainController', ['$scope', '$http',
       var obj = {};
       var currentLine = this.array[i];
       for (var j = 0; j < headers.length; j ++) {
-        obj[headers[j]] = currentLine[j];
+        if (headers[j].indexOf('.') > 0) {
+          var prefix = headers[j].substring(0, headers[j].indexOf('.'));
+          var suffix = headers[j].substring(headers[j].indexOf('.') + 1);
+          obj[prefix] = {};
+          obj[prefix][suffix] = currentLine[j];
+        } else {
+          obj[headers[j]] = currentLine[j];
+        }
       }
       this.JSON.push(obj);
     }
