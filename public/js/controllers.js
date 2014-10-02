@@ -8,6 +8,7 @@ segImport.controller('mainController', ['$scope', '$http',
   csv.array = []; // These are the rows.
   csv.JSON = []; // JSON object
   csv.JSONString = '';
+  csv.writeKey = '';
 
   // Take csv string and turn it into array.
   csv.addArray = function addArray(csv) {
@@ -24,8 +25,6 @@ segImport.controller('mainController', ['$scope', '$http',
 
   // Convert csv.array to csv.JSON.
   csv.arrayToJSON = function arrayToJSON() {
-
-    console.log(this.array);
 
     var headers = this.array[0];
     this.JSON.length = 0;
@@ -45,7 +44,7 @@ segImport.controller('mainController', ['$scope', '$http',
   // Post csv.JSON to end point.
   csv.importJSON = function importJSON() {
     // arrayToJSON.
-    $http.post('/api/import', {load: this.JSON})
+    $http.post('/api/import', {batch: this.JSON, writeKey: this.writeKey})
     .success(function(err, data) {
     })
     .error(function(err, data) {

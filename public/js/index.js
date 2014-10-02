@@ -19,6 +19,7 @@ window.onload = function() {
 
     if (file.type.match(textType)) {
       var reader = new FileReader();
+      console.log(reader);
 
       reader.onload = function(e) {
         var csvString = reader.result;
@@ -28,7 +29,6 @@ window.onload = function() {
         csvString = csvString.replace(firstLine, cleanedFirstLine);
 
         // Parse csv.
-        // csvFile = $.csv.toObjects(csvString, {startIndex: 1});
         var csv = new CSV(csvString);
         scope.$apply(function() {
           scope.csv.addArray(csv);
