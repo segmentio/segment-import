@@ -24,7 +24,7 @@ window.onload = function() {
         var csvString = reader.result;
         // Clean the headers.
         var firstLine = csvString.split('\n')[0];
-        var cleanedFirstLine = firstLine.toLowerCase().replace(/\s+/g, '_');
+        var cleanedFirstLine = firstLine.replace(/\s+/g, '_');
         csvString = csvString.replace(firstLine, cleanedFirstLine);
 
         // Parse csv.

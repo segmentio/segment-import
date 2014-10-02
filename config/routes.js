@@ -6,6 +6,8 @@
    * Import helpers ============================================================
    */
   var Segment = require('../app/helpers/segment.js');
+  var assert = require('http-assert');
+  var ok = require('assert');
 
   // Public functions. =========================================================
   module.exports = function(app) {
@@ -15,15 +17,16 @@
       // Need writeKey
       var writeKey = req.body.writeKey;
       var batch = {
-        batch: req.body.load
+        batch: req.body.batch
       };
 
-      Segment.batchImport(batch, writeKey, function(err, data) {
+      Segment.batchImport(writeKey, batch, function(err, http, body) {
         if (err)
-          console.log(err);
+          res.send(err, 400);
 
-        console.log(data);
-        res.send(200);
+        console.log(body);
+
+        res.send(body, 200);
       });
     });
 

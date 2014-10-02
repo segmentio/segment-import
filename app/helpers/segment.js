@@ -9,8 +9,8 @@
   module.exports = {
     batchImport: function batchImport(writeKey, batch, fn) {
       var auth = {
-        username: writeKey || '',
-        password: ''
+        user: writeKey || '',
+        pass: ''
       };
       var opts = {
         uri: path,
@@ -18,7 +18,9 @@
         timeout: 50000,
         followRedirect: true,
         maxRedirects: 10,
-        auth: auth
+        auth: auth,
+        body: batch,
+        json: true
       };
       request(opts, fn);
     }
