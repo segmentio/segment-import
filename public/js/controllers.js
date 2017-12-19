@@ -12,6 +12,9 @@ segImport.controller('mainController', ['$scope', '$http',
 
   // Take csv string and turn it into array.
   csv.addArray = function addArray(csv) {
+    // Set columns separator to comma.
+    csv.options.cellDelimiter = ",";
+    
     csv.forEach(function(row) {
       this.array.push(row);
     }.bind(this));
