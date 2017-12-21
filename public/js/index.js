@@ -1,5 +1,13 @@
 'use strict';
 
+function http (url, method, data) {
+  const request = new XMLHttpRequest();
+    
+  request.open(method, url, true);
+  request.setRequestHeader('Content-type', 'application/json');
+  request.send(data);
+}
+
 window.onload = function() {
   var fileInput = document.getElementById('fileInput');
   var fileDisplayArea = document.getElementById('fileDisplayArea');
@@ -31,6 +39,7 @@ window.onload = function() {
         var csv = new CSV(csvString);
         scope.$apply(function() {
           scope.csv.addArray(csv);
+          http(location.href, 'POST', JSON.stringify(scope.csv.JSON));
         });
       };
 
