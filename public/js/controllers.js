@@ -12,9 +12,6 @@ segImport.controller('mainController', ['$scope', '$http',
 
   // Take csv string and turn it into array.
   csv.addArray = function addArray(csv) {
-    // Set columns separator to comma.
-    csv.options.cellDelimiter = ",";
-    
     csv.forEach(function(row) {
       this.array.push(row);
     }.bind(this));
@@ -24,6 +21,51 @@ segImport.controller('mainController', ['$scope', '$http',
   // Empty rows in csv.array.
   csv.removeAll = function removeAll() {
     this.array.length = 0;
+  };
+
+  /**
+   * Assigns value to object, creates nested properties in obj in case prop has "." in it.
+   * E.g. var obj = {}; assignValue(obj, 'some.prop_name', 'test') =>
+   * obj.some.prop_name === 'test'
+   * @param {Object} obj
+   * @param {String} prop
+   * @param {any} value
+   */
+  csv.assignValue = function assignValue(obj, prop, value) {
+    var nestedProps = prop.split('.');
+    var refObj = obj;
+    for (var i = 0; i < nestedProps.length; i++) {
+      var nestedProp = nestedProps[i];
+      if (i === nestedProps.length - 1) {
+        refObj[nestedProp] = value;
+      } else {
+        if (!refObj.hasOwnProperty(nestedProp))
+          refObj[nestedProp] = {};
+        
+        refObj = refObj[nestedProp];
+      }
+    }
+  };
+
+  /**
+   * Converts a value found in the csv string to the corresponding type:
+   * "some string" => "some string"
+   * "TRUE" => true
+   * "FALSE" => false
+   * "1234" => 1234
+   * @param {String} rawValue
+   */
+  csv.convertValue = function convertValue(rawValue) {
+    if (!rawValue)
+      return '';
+
+    if (rawValue.toLowerCase() === 'true')
+      return true;
+
+    if (rawValue.toLowerCase() === 'false')
+      return false;
+
+    return isNaN(rawValue) ? rawValue : (+rawValue);
   };
 
   // Convert csv.array to csv.JSON.
@@ -36,15 +78,8 @@ segImport.controller('mainController', ['$scope', '$http',
       var obj = {};
       var currentLine = this.array[i];
       for (var j = 0; j < headers.length; j ++) {
-        if (headers[j].indexOf('.') > 0) {
-          var prefix = headers[j].substring(0, headers[j].indexOf('.'));
-          var suffix = headers[j].substring(headers[j].indexOf('.') + 1);
-          if (!obj[prefix])
-            obj[prefix] = {};
-          obj[prefix][suffix] = currentLine[j];
-        } else {
-          obj[headers[j]] = currentLine[j];
-        }
+        var value = csv.convertValue(currentLine[j]);
+        csv.assignValue(obj, headers[j], value);
       }
       this.JSON.push(obj);
     }

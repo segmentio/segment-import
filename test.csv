@@ -1,3 +1,3 @@
-action,userId,timestamp,traits.company,traits.email,traits.favorite_band
-identify,a3810,2014-10-02T00:46:34.576Z,segment,andy@segment.io,nirvana
-identify,b1238,2014-09-21T00:26:25.576Z,mixpanel,steve@mixpanel.com,nickelback
+action,userId,timestamp,traits.company,traits.email,traits.favorite_band,traits.some_number,traits.some_bool,first.second.third_level
+identify,a3810,2014-10-02T00:46:34.576Z,segment,andy@segment.io,nirvana,0,TRUE,2
+identify,b1238,2014-09-21T00:26:25.576Z,mixpanel,steve@mixpanel.com,nickelback,1,FALSE,5
