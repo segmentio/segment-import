@@ -33,19 +33,30 @@ segImport.controller('mainController', ['$scope', '$http',
       var obj = {};
       var currentLine = this.array[i];
       for (var j = 0; j < headers.length; j ++) {
+        // Keep Nulls, ints and floats 
+        switch (true) {
+          case currentLine[j] == 'null':
+            currentLine[j] = null
+            break
+          case /^[0-9]+$/.test(currentLine[j]):
+            currentLine[j] = parseInt(currentLine[j])
+            break
+          case /^[0-9]*\.[0-9]+$/.test(currentLine[j]):
+            currentLine[j] = parseFloat(currentLine[j])
+            break
+        }
         if (headers[j].indexOf('.') > 0) {
           var prefix = headers[j].substring(0, headers[j].indexOf('.'));
           var suffix = headers[j].substring(headers[j].indexOf('.') + 1);
           if (!obj[prefix])
-            obj[prefix] = {};
-          obj[prefix][suffix] = currentLine[j];
+            obj[prefix] = {};  
+          obj[prefix][suffix] = currentLine[j] ;
         } else {
           obj[headers[j]] = currentLine[j];
         }
       }
       this.JSON.push(obj);
     }
-
     this.JSONString = JSON.stringify(this.JSON, null, 2);
   };
 
