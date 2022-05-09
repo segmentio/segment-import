@@ -14,9 +14,9 @@
   },
   "private": true,
   "dependencies": {
-    "express": "3.x",
-    "underscore": "latest",
-    "request": "latest",
-    "http-assert": "latest"
+    "express": "^3.21.2",
+    "http-assert": "^1.5.0",
+    "request": "^2.88.2",
+    "underscore": "latest"
   }
 }
