@@ -4,7 +4,7 @@
 
 (function() {
   var request = require('request');
-  var path = 'events.eu1.segmentapis.com/v1/import/';
+  var path = 'https://events.eu1.segmentapis.com/';
 
   module.exports = {
     batchImport: function batchImport(writeKey, batch, fn) {
