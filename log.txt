@@ -1,0 +1,22 @@
+[Fri Jan 20 2023 22:05:42 GMT+0100 (Центральная Европа, стандартное время)]
+[
+    {
+        "action": "identify",
+        "userId": "2a822a0506a6af12feb0",
+        "traits": {
+            "city": "london",
+            "autorenewal": true
+        }
+    }
+][Fri Jan 20 2023 22:09:01 GMT+0100 (Центральная Европа, стандартное время)]
+[
+    {
+        "action": "identify",
+        "userId": "2a822a0506a6af12feb0",
+        "type": "identify",
+        "traits": {
+            "city": "london",
+            "autorenewal": true
+        }
+    }
+]

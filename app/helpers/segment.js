@@ -4,7 +4,7 @@
 
 (function() {
   var request = require('request');
-  var path = 'events.eu1.segmentapis.com/v1';
+  var path = 'https://iubendaekxtnd.dataplane.rudderstack.com/v1/batch';
 
   module.exports = {
     batchImport: function batchImport(writeKey, batch, fn) {
