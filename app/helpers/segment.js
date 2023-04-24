@@ -4,10 +4,9 @@
 
 (function() {
   var request = require('request');
-  var path = 'https://iubendaekxtnd.dataplane.rudderstack.com/v1/batch';
 
   module.exports = {
-    batchImport: function batchImport(writeKey, batch, fn) {
+    batchImport: function batchImport(writeKey, batch, path, fn) {
       var auth = {
         user: writeKey || '',
         pass: ''
